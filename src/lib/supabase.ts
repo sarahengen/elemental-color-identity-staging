@@ -4,11 +4,11 @@ import { getViteEnv, isDevMode } from '@/lib/env';
 /** Prefer Vite env (famous.ai / Deploypad inject these); fall back for local dev. */
 const supabaseUrl =
   getViteEnv('VITE_SUPABASE_URL') ||
-  'https://nixjxykxmfrfdzjyvqcy.supabase.co';
+  'https://gvmyeiklnsudqwanhiyf.supabase.co';
 
 const supabaseKey =
   getViteEnv('VITE_SUPABASE_ANON_KEY') ||
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5peGp4eWt4bWZyZmR6anl2cWN5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjYzMDQ0MTMsImV4cCI6MjA4MTg4MDQxM30.OS39nUTK6Uq3YnrMnC7Cws3kLJdoejrse-CjAfqw6ik';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd2bXllaWtsbnN1ZHF3YW5oaXlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjYxNzMzODEsImV4cCI6MjA4MTc0OTM4MX0.4j_KzWsBZC8qSn6i5rlijWHJCfQbN_KyQ7pHxR9m4qw';
 
 if (!supabaseUrl || !supabaseKey) {
   throw new Error(

@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elemental Color Identity - Site Map</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+      color: #1e293b;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, #f59e0b, #14b8a6, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+    
+    .subtitle {
+      color: #64748b;
+      font-size: 1.1rem;
+    }
+    
+    .generated-date {
+      color: #94a3b8;
+      font-size: 0.875rem;
+      margin-top: 8px;
+    }
+    
+    .section {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    .section-title {
+      font-size: 1.5rem;
+      color: #1e293b;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .section-title .icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+    
+    .routes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    
+    .route-card {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid #e2e8f0;
+    }
+    
+    .route-card h3 {
+      font-size: 1.1rem;
+      color: #1e293b;
+      margin-bottom: 8px;
+    }
+    
+    .route-card .path {
+      font-family: monospace;
+      background: #e2e8f0;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      color: #475569;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    
+    .route-card p {
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+    
+    .sections-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    
+    .section-item {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 16px 20px;
+      border-left: 4px solid;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .section-item.free {
+      border-color: #10b981;
+    }
+    
+    .section-item.premium {
+      border-color: #f59e0b;
+    }
+    
+    .section-item h4 {
+      font-size: 1rem;
+      color: #1e293b;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .section-item .anchor {
+      font-family: monospace;
+      background: #e2e8f0;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+    
+    .section-item p {
+      color: #64748b;
+      font-size: 0.85rem;
+    }
+    
+    .badge {
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    
+    .badge.free {
+      background: #d1fae5;
+      color: #065f46;
+    }
+    
+    .badge.premium {
+      background: linear-gradient(135deg, #fef3c7, #fce7f3);
+      color: #92400e;
+    }
+    
+    .components-tree {
+      font-family: monospace;
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 24px;
+      border-radius: 12px;
+      overflow-x: auto;
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+    
+    .components-tree .folder {
+      color: #fbbf24;
+    }
+    
+    .components-tree .file {
+      color: #60a5fa;
+    }
+    
+    .components-tree .comment {
+      color: #64748b;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+    }
+    
+    .feature-item {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid #e2e8f0;
+    }
+    
+    .feature-item h4 {
+      font-size: 0.95rem;
+      color: #1e293b;
+      margin-bottom: 6px;
+    }
+    
+    .feature-item p {
+      color: #64748b;
+      font-size: 0.85rem;
+    }
+    
+    .nav-structure {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .nav-row {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 16px;
+    }
+    
+    .nav-row h4 {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .nav-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    
+    .nav-item {
+      background: white;
+      border: 1px solid #e2e8f0;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      color: #475569;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .nav-item.premium {
+      background: linear-gradient(135deg, #fffbeb, #fef2f2);
+      border-color: #fcd34d;
+    }
+    
+    .legend {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #e2e8f0;
+      flex-wrap: wrap;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.875rem;
+      color: #64748b;
+    }
+    
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+    }
+    
+    .legend-color.free {
+      background: #10b981;
+    }
+    
+    .legend-color.premium {
+      background: #f59e0b;
+    }
+    
+    .print-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: linear-gradient(135deg, #1e293b, #334155);
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .print-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+    }
+    
+    @media print {
+      body {
+        background: white;
+        padding: 20px;
+      }
+      
+      .print-btn {
+        display: none;
+      }
+      
+      .section {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #e2e8f0;
+      }
+    }
+    
+    @media (max-width: 640px) {
+      h1 {
+        font-size: 1.75rem;
+      }
+      
+      .section {
+        padding: 20px;
+      }
+      
+      .components-tree {
+        font-size: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Elemental Color Identity</h1>
+      <p class="subtitle">Complete Site Map & Architecture Reference</p>
+      <p class="generated-date">Generated: January 18, 2026</p>
+    </header>
+
+    <!-- Routes Section -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="icon" style="background: #dbeafe;">🗺️</span>
+        Application Routes
+      </h2>
+      <div class="routes-grid">
+        <div class="route-card">
+          <h3>Home Page</h3>
+          <span class="path">/</span>
+          <p>Main landing page with all sections, quiz access, and feature overview. Single-page application with scroll-based navigation.</p>
+        </div>
+        <div class="route-card">
+          <h3>404 Not Found</h3>
+          <span class="path">/*</span>
+          <p>Catch-all route for undefined paths, displays a friendly error page with navigation back to home.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page Sections -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="icon" style="background: #dcfce7;">📑</span>
+        Page Sections (Scroll Navigation)
+      </h2>
+      <div class="sections-list">
+        <!-- Free Sections -->
+        <div class="section-item free">
+          <h4>
+            Home / Hero
+            <span class="badge free">Free</span>
+          </h4>
+          <span class="anchor">#home</span>
+          <p>Main hero section with value proposition, CTA buttons, and introduction to elemental color typing.</p>
+        </div>
+        
+        <div class="section-item free">
+          <h4>
+            How It Works
+            <span class="badge free">Free</span>
+          </h4>
+          <span class="anchor">(below hero)</span>
+          <p>Three-step explanation: Take Quiz → Discover Type → Express Yourself.</p>
+        </div>
+        
+        <div class="section-item free">
+          <h4>
+            Elemental Types
+            <span class="badge free">Free</span>
+          </h4>
+          <span class="anchor">#types</span>
+          <p>Grid of four elemental types (Fire, Water, Earth, Air) with clickable cards leading to detailed views.</p>
+        </div>
+        
+        <div class="section-item free">
+          <h4>
+            Color Wheel
+            <span class="badge free">Free</span>
+          </h4>
+          <span class="anchor">#color-wheel</span>
+          <p>Interactive elemental color wheel showing all 16 subtypes and their relationships.</p>
+        </div>
+        
+        <div class="section-item free">
+          <h4>
+            AI Selfie Analyzer
+            <span class="badge free">Free</span>
+          </h4>
+          <span class="anchor">#selfie-analyzer</span>
+          <p>Upload a selfie for AI-powered analysis of skin undertone, hair, and eye color to determine elemental type.</p>
+        </div>
+        
+        <div class="section-item free">
+          <h4>
+            Camera Color Analyzer
+            <span class="badge free">Free</span>
+          </h4>
+          <span class="anchor">#analyzer</span>
+          <p>Real-time camera tool to analyze clothing colors against your elemental palette.</p>
+        </div>
+        
+        <div class="section-item free">
+          <h4>
+            Wardrobe Analyzer
+            <span class="badge free">Free</span>
+          </h4>
+          <span class="anchor">#wardrobe</span>
+          <p>Upload clothing photos to check compatibility with your palette. Limited uses for free tier.</p>
+        </div>
+        
+        <div class="section-item free">
+          <h4>
+            Color Palette Dashboard
+            <span class="badge free">Free</span>
+          </h4>
+          <span class="anchor">(conditional)</span>
+          <p>Displays user's personalized color palette after completing the quiz.</p>
+        </div>
+        
+        <div class="section-item free">
+          <h4>
+            Membership Plans
+            <span class="badge free">Free</span>
+          </h4>
+          <span class="anchor">#membership</span>
+          <p>Pricing page with free, premium, and pro tier options with Stripe integration.</p>
+        </div>
+        
+        <div class="section-item free">
+          <h4>
+            Consultations
+            <span class="badge free">Free</span>
+          </h4>
+          <span class="anchor">#consultations</span>
+          <p>Book one-on-one color consultations with experts. Premium members get discounts.</p>
+        </div>
+        
+        <div class="section-item free">
+          <h4>
+            Color Classes
+            <span class="badge free">Free</span>
+          </h4>
+          <span class="anchor">#classes</span>
+          <p>Group classes and workshops for learning about elemental color theory.</p>
+        </div>
+
+        <!-- Premium Sections -->
+        <div class="section-item premium">
+          <h4>
+            Celebrity Gallery
+            <span class="badge premium">Premium</span>
+          </h4>
+          <span class="anchor">#celebrities</span>
+          <p>Browse celebrities, historical figures, and fictional characters by elemental type. Find your celebrity twin.</p>
+        </div>
+        
+        <div class="section-item premium">
+          <h4>
+            Compare Types
+            <span class="badge premium">Premium</span>
+          </h4>
+          <span class="anchor">#compare</span>
+          <p>Side-by-side comparison tool for elemental types. Great for couples and teams.</p>
+        </div>
+        
+        <div class="section-item premium">
+          <h4>
+            Hair Color Guide
+            <span class="badge premium">Premium</span>
+          </h4>
+          <span class="anchor">#hair-color</span>
+          <p>Personalized hair dye recommendations based on elemental type and undertone.</p>
+        </div>
+        
+        <div class="section-item premium">
+          <h4>
+            Decor & Environment
+            <span class="badge premium">Premium</span>
+          </h4>
+          <span class="anchor">#decor</span>
+          <p>Room-by-room color and design recommendations for your living spaces.</p>
+        </div>
+        
+        <div class="section-item premium">
+          <h4>
+            Jewelry & Accessories
+            <span class="badge premium">Premium</span>
+          </h4>
+          <span class="anchor">#jewelry</span>
+          <p>Metal, gemstone, and accessory recommendations for your undertone.</p>
+        </div>
+        
+        <div class="section-item premium">
+          <h4>
+            Spiritual Essence
+            <span class="badge premium">Premium</span>
+          </h4>
+          <span class="anchor">#spiritual-essence</span>
+          <p>Deeper spiritual meaning, soul purpose, and practices for your elemental type.</p>
+        </div>
+        
+        <div class="section-item premium">
+          <h4>
+            Elemental Philosophies
+            <span class="badge premium">Premium</span>
+          </h4>
+          <span class="anchor">#philosophies</span>
+          <p>Your elemental type as a lived philosophy with core tenets and ethical imperatives.</p>
+        </div>
+        
+        <div class="section-item premium">
+          <h4>
+            Career Attractions
+            <span class="badge premium">Premium</span>
+          </h4>
+          <span class="anchor">#careers</span>
+          <p>Career recommendations where your elemental energy naturally thrives.</p>
+        </div>
+        
+        <div class="section-item premium">
+          <h4>
+            Elemental Blocks
+            <span class="badge premium">Premium</span>
+          </h4>
+          <span class="anchor">#blocks</span>
+          <p>Understanding your greatest obstacle when your strength becomes inverted.</p>
+        </div>
+        
+        <div class="section-item premium">
+          <h4>
+            Elemental Imbalance
+            <span class="badge premium">Premium</span>
+          </h4>
+          <span class="anchor">#imbalance</span>
+          <p>How your energy manifests when blocked, excessive, or deficient.</p>
+        </div>
+        
+        <div class="section-item premium">
+          <h4>
+            Elemental Biorhythms
+            <span class="badge premium">Premium</span>
+          </h4>
+          <span class="anchor">#biorhythms</span>
+          <p>Your innate biorhythmic signature and ideal daily routine.</p>
+        </div>
+        
+        <div class="section-item premium">
+          <h4>
+            Love Languages
+            <span class="badge premium">Premium</span>
+          </h4>
+          <span class="anchor">#love-languages</span>
+          <p>How your elemental type receives and expresses love through somatic and energetic languages.</p>
+        </div>
+        
+        <div class="section-item premium">
+          <h4>
+            Cinematic Preferences
+            <span class="badge premium">Premium</span>
+          </h4>
+          <span class="anchor">#cinematic</span>
+          <p>Film recommendations that resonate with your core energy - cinematic resonance therapy.</p>
+        </div>
+      </div>
+      
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-color free"></div>
+          <span>Free Feature</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color premium"></div>
+          <span>Premium Feature (requires subscription)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Structure -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="icon" style="background: #fef3c7;">🧭</span>
+        Header Navigation Structure
+      </h2>
+      <div class="nav-structure">
+        <div class="nav-row">
+          <h4>Navigation Row 1</h4>
+          <div class="nav-items">
+            <div class="nav-item">Home</div>
+            <div class="nav-item">Elemental Types</div>
+            <div class="nav-item">Color Wheel</div>
+            <div class="nav-item">AI Analysis</div>
+            <div class="nav-item premium">Compare Types 🔒</div>
+            <div class="nav-item premium">Famous Faces 🔒</div>
+          </div>
+        </div>
+        <div class="nav-row">
+          <h4>Navigation Row 2</h4>
+          <div class="nav-items">
+            <div class="nav-item">Color Analyzer</div>
+            <div class="nav-item premium">Hair Guide 🔒</div>
+            <div class="nav-item premium">Decor Guide 🔒</div>
+            <div class="nav-item premium">Jewelry Guide 🔒</div>
+            <div class="nav-item premium">Spiritual Essence 🔒</div>
+            <div class="nav-item">Consultations</div>
+            <div class="nav-item">Classes</div>
+            <div class="nav-item" style="background: linear-gradient(135deg, #fef3c7, #fce7f3);">Premium ⭐</div>
+          </div>
+        </div>
+        <div class="nav-row">
+          <h4>Header Actions</h4>
+          <div class="nav-items">
+            <div class="nav-item">Take Quiz (CTA Button)</div>
+            <div class="nav-item">Sign In / User Profile</div>
+            <div class="nav-item">Mobile Menu Toggle</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Component Architecture -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="icon" style="background: #e0e7ff;">🏗️</span>
+        Component Architecture
+      </h2>
+      <div class="components-tree">
+<span class="folder">src/</span>
+├── <span class="folder">components/</span>
+│   ├── <span class="file">AppLayout.tsx</span>           <span class="comment">// Main layout orchestrator</span>
+│   ├── <span class="file">Header.tsx</span>              <span class="comment">// Navigation header with two rows</span>
+│   ├── <span class="file">Footer.tsx</span>              <span class="comment">// Site footer</span>
+│   ├── <span class="file">HeroSection.tsx</span>         <span class="comment">// Landing hero with CTAs</span>
+│   ├── <span class="file">Quiz.tsx</span>                <span class="comment">// Elemental type quiz modal</span>
+│   ├── <span class="file">AuthModal.tsx</span>           <span class="comment">// Sign in/up modal</span>
+│   │
+│   ├── <span class="comment">// Elemental Type Components</span>
+│   ├── <span class="file">ElementalTypeCard.tsx</span>   <span class="comment">// Type preview card</span>
+│   ├── <span class="file">ElementalTypeDetail.tsx</span> <span class="comment">// Full type detail view</span>
+│   ├── <span class="file">ElementalColorWheel.tsx</span> <span class="comment">// Interactive color wheel</span>
+│   ├── <span class="file">ColorPalette.tsx</span>        <span class="comment">// User's palette display</span>
+│   │
+│   ├── <span class="comment">// Analysis Tools</span>
+│   ├── <span class="file">SelfieColorAnalyzer.tsx</span> <span class="comment">// AI photo analysis</span>
+│   ├── <span class="file">CameraColorAnalyzer.tsx</span> <span class="comment">// Real-time camera tool</span>
+│   ├── <span class="file">WardrobeAnalyzer.tsx</span>    <span class="comment">// Clothing photo analysis</span>
+│   ├── <span class="file">ComparisonTool.tsx</span>      <span class="comment">// Type comparison (Premium)</span>
+│   │
+│   ├── <span class="comment">// Premium Guides</span>
+│   ├── <span class="file">CelebrityGallery.tsx</span>    <span class="comment">// Famous faces gallery</span>
+│   ├── <span class="file">HairColorGuide.tsx</span>      <span class="comment">// Hair dye recommendations</span>
+│   ├── <span class="file">DecorEnvironmentGuide.tsx</span>
+│   ├── <span class="file">JewelryAccessoriesGuide.tsx</span>
+│   ├── <span class="file">SpiritualEssenceGuide.tsx</span>
+│   ├── <span class="file">ElementalPhilosophies.tsx</span>
+│   ├── <span class="file">CareerAttractions.tsx</span>
+│   ├── <span class="file">ElementalBlocks.tsx</span>
+│   ├── <span class="file">ElementalImbalance.tsx</span>
+│   ├── <span class="file">ElementalBiorhythms.tsx</span>
+│   ├── <span class="file">ElementalLoveLanguages.tsx</span>
+│   ├── <span class="file">CinematicPreferences.tsx</span>
+│   │
+│   ├── <span class="comment">// Booking & Membership</span>
+│   ├── <span class="file">MembershipPlans.tsx</span>     <span class="comment">// Pricing tiers</span>
+│   ├── <span class="file">ConsultationBooking.tsx</span> <span class="comment">// 1:1 booking</span>
+│   ├── <span class="file">ColorClassBooking.tsx</span>   <span class="comment">// Class registration</span>
+│   ├── <span class="file">PaymentCheckout.tsx</span>     <span class="comment">// Stripe integration</span>
+│   ├── <span class="file">SubscriptionCheckout.tsx</span>
+│   │
+│   ├── <span class="comment">// User Features</span>
+│   ├── <span class="file">ProfilePage.tsx</span>        <span class="comment">// User profile view</span>
+│   ├── <span class="file">ProfileSettings.tsx</span>    <span class="comment">// Account settings</span>
+│   ├── <span class="file">QuizHistory.tsx</span>        <span class="comment">// Past quiz results</span>
+│   ├── <span class="file">RetakeQuizSection.tsx</span>
+│   │
+│   ├── <span class="comment">// Utility Components</span>
+│   ├── <span class="file">PremiumGate.tsx</span>        <span class="comment">// Premium feature blocker</span>
+│   ├── <span class="file">SocialShareCard.tsx</span>    <span class="comment">// Share results</span>
+│   ├── <span class="file">WheelShareCard.tsx</span>
+│   ├── <span class="file">CustomPaletteBuilder.tsx</span>
+│   │
+│   └── <span class="folder">ui/</span>                   <span class="comment">// shadcn/ui components</span>
+│       ├── <span class="file">button.tsx</span>
+│       ├── <span class="file">card.tsx</span>
+│       ├── <span class="file">dialog.tsx</span>
+│       ├── <span class="file">tabs.tsx</span>
+│       └── <span class="file">... (40+ UI components)</span>
+│
+├── <span class="folder">contexts/</span>
+│   ├── <span class="file">AppContext.tsx</span>         <span class="comment">// Global app state</span>
+│   └── <span class="file">AuthContext.tsx</span>        <span class="comment">// Authentication state</span>
+│
+├── <span class="folder">data/</span>
+│   ├── <span class="file">elementalTypes.ts</span>      <span class="comment">// 4 elements, 16 subtypes</span>
+│   ├── <span class="file">decorData.ts</span>           <span class="comment">// Decor recommendations</span>
+│   ├── <span class="file">jewelryData.ts</span>         <span class="comment">// Jewelry recommendations</span>
+│   ├── <span class="file">makeupData.ts</span>
+│   ├── <span class="file">makeupProducts.ts</span>
+│   └── <span class="file">nailData.ts</span>
+│
+├── <span class="folder">hooks/</span>
+│   ├── <span class="file">useAuth.ts</span>             <span class="comment">// Auth hook</span>
+│   ├── <span class="file">use-toast.ts</span>           <span class="comment">// Toast notifications</span>
+│   └── <span class="file">use-mobile.tsx</span>         <span class="comment">// Mobile detection</span>
+│
+├── <span class="folder">lib/</span>
+│   ├── <span class="file">supabase.ts</span>            <span class="comment">// Supabase client</span>
+│   └── <span class="file">utils.ts</span>               <span class="comment">// Utility functions</span>
+│
+└── <span class="folder">pages/</span>
+    ├── <span class="file">Index.tsx</span>              <span class="comment">// Main page wrapper</span>
+    └── <span class="file">NotFound.tsx</span>           <span class="comment">// 404 page</span>
+      </div>
+    </div>
+
+    <!-- User Flows -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="icon" style="background: #fce7f3;">🔄</span>
+        Key User Flows
+      </h2>
+      <div class="features-grid">
+        <div class="feature-item">
+          <h4>1. Quiz Flow</h4>
+          <p>Hero CTA → Quiz Modal (12 questions) → Element Result → Subtype Quiz (6 questions) → Full Result → Save to Profile</p>
+        </div>
+        <div class="feature-item">
+          <h4>2. Authentication Flow</h4>
+          <p>Sign In Button → Auth Modal → Email/Password → Supabase Auth → Profile Load → Sync Quiz Results</p>
+        </div>
+        <div class="feature-item">
+          <h4>3. Premium Upgrade Flow</h4>
+          <p>Premium Gate → Membership Section → Select Plan → Stripe Checkout → Subscription Active → Unlock Features</p>
+        </div>
+        <div class="feature-item">
+          <h4>4. Selfie Analysis Flow</h4>
+          <p>Upload Photo → AI Analysis → Undertone Detection → Element Match → Subtype Recommendation → Save Result</p>
+        </div>
+        <div class="feature-item">
+          <h4>5. Wardrobe Analysis Flow</h4>
+          <p>Upload Clothing Photo → Color Extraction → Palette Comparison → Compatibility Score → Suggestions</p>
+        </div>
+        <div class="feature-item">
+          <h4>6. Consultation Booking Flow</h4>
+          <p>Select Expert → Choose Time → Apply Premium Discount → Payment → Confirmation Email</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Data Models -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="icon" style="background: #d1fae5;">💾</span>
+        Core Data Models
+      </h2>
+      <div class="features-grid">
+        <div class="feature-item">
+          <h4>Elemental Types (4)</h4>
+          <p>Fire (Summer), Water (Winter), Earth (Autumn), Air (Spring) - each with unique colors, traits, and imagery.</p>
+        </div>
+        <div class="feature-item">
+          <h4>Subtypes (16)</h4>
+          <p>4 subtypes per element based on secondary influence: Pure, +Fire, +Water, +Earth, +Air combinations.</p>
+        </div>
+        <div class="feature-item">
+          <h4>User Profile</h4>
+          <p>elemental_type, elemental_subtype, membership_tier, saved_hair_colors, quiz_history, preferences.</p>
+        </div>
+        <div class="feature-item">
+          <h4>Subscription</h4>
+          <p>tier (free/premium/pro), stripe_customer_id, subscription_status, current_period_end.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tech Stack -->
+    <div class="section">
+      <h2 class="section-title">
+        <span class="icon" style="background: #dbeafe;">⚙️</span>
+        Technology Stack
+      </h2>
+      <div class="features-grid">
+        <div class="feature-item">
+          <h4>Frontend</h4>
+          <p>React 18, TypeScript, Vite, Tailwind CSS, shadcn/ui components</p>
+        </div>
+        <div class="feature-item">
+          <h4>State Management</h4>
+          <p>React Context (Auth, App), React Query for server state</p>
+        </div>
+        <div class="feature-item">
+          <h4>Backend</h4>
+          <p>Supabase (Auth, Database, Edge Functions, Storage)</p>
+        </div>
+        <div class="feature-item">
+          <h4>Payments</h4>
+          <p>Stripe (Subscriptions, Checkout Sessions)</p>
+        </div>
+        <div class="feature-item">
+          <h4>AI Features</h4>
+          <p>OpenAI Vision API for selfie analysis</p>
+        </div>
+        <div class="feature-item">
+          <h4>Routing</h4>
+          <p>React Router v6 (minimal routes, scroll-based navigation)</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <button class="print-btn" onclick="window.print()">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+      <rect x="6" y="14" width="12" height="8"/>
+    </svg>
+    Print / Save PDF
+  </button>
+</body>
+</html>

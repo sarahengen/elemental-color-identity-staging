@@ -1,0 +1,1 @@
+export const USER_UPLOADS_BUCKET = 'user-uploads';

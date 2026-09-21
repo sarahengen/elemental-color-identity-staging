@@ -130,7 +130,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       return profileFetchInFlight.current;
     }
 
-    const run = async () => {
+    // Recurses on itself (not on fetchProfile) so retries don't re-enter the
+    // in-flight guard above — that guard still points at this same call's
+    // promise while a retry is pending, and awaiting it there deadlocks forever.
+    const run = async (attempt: number): Promise<void> => {
       try {
         const { data, error, timedOut } = await runQueryWithTimeout(
           'AuthContext profile',
@@ -153,14 +156,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       if (!data) {
         console.log('🔍 AuthContext: No profile found');
-        
+
         // Profile doesn't exist yet - trigger might still be creating it
-        if (retryCount < 2) {
-          console.log(`⏳ AuthContext: Profile not found, retrying in 500ms... (attempt ${retryCount + 1}/3)`);
+        if (attempt < 2) {
+          console.log(`⏳ AuthContext: Profile not found, retrying in 500ms... (attempt ${attempt + 1}/3)`);
           await new Promise(resolve => setTimeout(resolve, 500));
-          return fetchProfile(userId, retryCount + 1);
+          return run(attempt + 1);
         }
-        
+
         // After retries, try to create it manually
         console.warn('⚠️ AuthContext: Profile not found after retries, attempting manual creation...');
         
@@ -206,7 +209,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     };
 
-    profileFetchInFlight.current = run().finally(() => {
+    profileFetchInFlight.current = run(retryCount).finally(() => {
       profileFetchInFlight.current = null;
     });
     return profileFetchInFlight.current;
@@ -507,8 +510,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         console.log('✅ Sign up successful');
         console.log('ℹ️ Profile will be created automatically by database trigger');
         
-        // Supabase email confirmation is disabled, so signUp returns an active
-        // session — sign the user in right away. (Mailchimp handles welcome/verification.)
+        // When the project's "Confirm email" setting is off, signUp returns an
+        // active session immediately — sign the user in right away. If it's on,
+        // there's no session yet, so don't claim they're logged in (a caller like
+        // the quiz relies on `user` being set to save results).
         if (data.session) {
           setUser(data.user);
           // Wait a moment for trigger to create profile, then fetch
@@ -522,7 +527,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           const { data: emailData, error: emailError } = await supabase.functions.invoke('send-welcome-email', {
             body: { email, fullName },
           });
-          
+
           if (emailError) {
             console.error('⚠️ Welcome email failed (non-blocking):', emailError);
           } else {
@@ -533,10 +538,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           console.error('⚠️ Welcome email error (non-blocking):', emailErr);
         }
 
-        toast({
-          title: 'Account created!',
-          description: "Welcome to Elemental Color — you're all set.",
-        });
+        if (data.session) {
+          toast({
+            title: 'Account created!',
+            description: "Welcome to Elemental Color — you're all set.",
+          });
+        } else {
+          toast({
+            title: 'Check your email',
+            description: 'Confirm your email to finish creating your account and save your quiz results.',
+          });
+        }
       }
     } catch (error: any) {
       console.error('❌ Sign up error:', error);

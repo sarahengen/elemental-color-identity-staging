@@ -55,9 +55,9 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSignIn, onSign
         onClose();
       } else {
         await onSignUp(email, password, fullName);
-        // Supabase email confirmation is disabled, so signUp returns an active
-        // session and the user is signed in immediately — just close the modal.
-        // (Welcome / list verification is handled via Mailchimp.)
+        // If the project's "Confirm email" setting is on, onSignUp won't have a
+        // session yet (see AuthContext.signUp) and already toasted what to do
+        // next — just close the modal either way.
         await new Promise(resolve => setTimeout(resolve, 500));
         onClose();
       }

@@ -228,6 +228,11 @@ const Quiz: React.FC<QuizProps> = ({ onComplete, onClose, initialElement, initia
   // access to all their tools — then checkout, then the success screen.
   const handleBuyProfile = () => {
     storePendingQuizResults();
+    if (hasSubtypeProfileAccess(profile)) {
+      localStorage.removeItem('pendingProfilePurchase');
+      setShowProfileCheckout(false);
+      return;
+    }
     if (!user) {
       localStorage.setItem('pendingProfilePurchase', 'true');
       onOpenAuth?.();
@@ -257,6 +262,7 @@ const Quiz: React.FC<QuizProps> = ({ onComplete, onClose, initialElement, initia
     if (localStorage.getItem('pendingProfilePurchase') !== 'true') return;
     localStorage.removeItem('pendingProfilePurchase');
     if (!hasSubtypeProfileAccess(profile)) setShowProfileCheckout(true);
+    else setShowProfileCheckout(false);
   }, [showResults, user, resultElement, resultSubtype, profile]);
 
   const resultData = resultElement ? elementalTypes.find((t) => t.id === resultElement) : null;
@@ -513,7 +519,7 @@ const Quiz: React.FC<QuizProps> = ({ onComplete, onClose, initialElement, initia
           subtype={subtypeData}
         />
 
-        {showProfileCheckout && user && resultElement && resultSubtype && (
+        {showProfileCheckout && !hasProfileAccess && user && resultElement && resultSubtype && (
           <ProfilePurchaseCheckout
             user={user}
             elementalType={resultElement}

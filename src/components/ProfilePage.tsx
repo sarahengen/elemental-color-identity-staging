@@ -1994,7 +1994,17 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
                     note={userSubtype ? `One-time payment` : 'Complete the Free Quiz to discover your subtype'}
                     gradientFrom={activeColors[0]?.hex ?? '#a855f7'}
                     gradientTo={activeColors[1]?.hex ?? activeColors[0]?.hex ?? '#ec4899'}
-                    onUnlock={() => (userSubtype ? setShowProfileCheckout(true) : onStartQuiz('subtype'))}
+                    onUnlock={() => {
+                      if (ownsProfile) {
+                        setShowProfileCheckout(false);
+                        return;
+                      }
+                      if (userSubtype) {
+                        setShowProfileCheckout(true);
+                      } else {
+                        onStartQuiz('subtype');
+                      }
+                    }}
                   >
                   <p className="text-gray-600 leading-relaxed mb-6">{userSubtype ? userSubtype.description : userType.description}</p>
                   <div className="mb-6">
@@ -2498,7 +2508,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
         />
       )}
 
-      {showProfileCheckout && user && profile?.elemental_type && profile?.elemental_subtype && (
+      {showProfileCheckout && !ownsProfile && user && profile?.elemental_type && profile?.elemental_subtype && (
         <ProfilePurchaseCheckout
           user={user}
           elementalType={profile.elemental_type}

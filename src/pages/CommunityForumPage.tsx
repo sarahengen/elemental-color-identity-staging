@@ -41,6 +41,11 @@ const CommunityForumPageInner: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleUnlockRoots = useCallback(() => {
+    if (hasSubtypeProfileAccess(profile)) {
+      localStorage.removeItem('pendingProfilePurchase');
+      setShowProfileCheckout(false);
+      return;
+    }
     if (!user) {
       localStorage.setItem('pendingProfilePurchase', 'true');
       setShowAuthModal(true);
@@ -51,7 +56,7 @@ const CommunityForumPageInner: React.FC = () => {
       return;
     }
     setShowQuiz(true);
-  }, [user, profile?.elemental_type, profile?.elemental_subtype]);
+  }, [user, profile]);
 
   useEffect(() => {
     if (!user || !profile) return;
@@ -295,7 +300,7 @@ const CommunityForumPageInner: React.FC = () => {
           onSignUp={handleSignUp}
         />
       )}
-      {showProfileCheckout && user && profile?.elemental_type && profile?.elemental_subtype && (
+      {showProfileCheckout && !canAccessRoots && user && profile?.elemental_type && profile?.elemental_subtype && (
         <ProfilePurchaseCheckout
           user={user}
           elementalType={profile.elemental_type}
